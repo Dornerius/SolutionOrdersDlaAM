@@ -1,0 +1,972 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="OrderModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Adresy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Uzytkownika" Type="int" />
+          <Property Name="Ulica" Type="nvarchar" MaxLength="100" />
+          <Property Name="Miasto" Type="nvarchar" MaxLength="50" />
+          <Property Name="KodPocztowy" Type="nvarchar" MaxLength="20" />
+          <Property Name="Kraj" Type="nvarchar" MaxLength="50" />
+          <Property Name="TypAdresu" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Dostawy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Zamowienia" Type="int" />
+          <Property Name="FirmaKurierska" Type="nvarchar" MaxLength="100" />
+          <Property Name="NumerSledzenia" Type="nvarchar" MaxLength="50" />
+          <Property Name="StatusDostawy" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Koszyk">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Uzytkownika" Type="int" />
+          <Property Name="DataUtworzenia" Type="date" />
+        </EntityType>
+        <EntityType Name="KoszykProdukty">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Koszyka" Type="int" />
+          <Property Name="ID_Produktu" Type="int" />
+          <Property Name="Ilosc" Type="int" />
+        </EntityType>
+        <EntityType Name="Opinie">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Produktu" Type="int" />
+          <Property Name="ID_Uzytkownika" Type="int" />
+          <Property Name="Ocena" Type="int" />
+          <Property Name="Komentarz" Type="nvarchar(max)" />
+          <Property Name="DataDodania" Type="date" />
+        </EntityType>
+        <EntityType Name="Platnosci">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Zamowienia" Type="int" />
+          <Property Name="TypPlatnosci" Type="nvarchar" MaxLength="20" />
+          <Property Name="StatusPlatnosci" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Produkty">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwa" Type="nvarchar" MaxLength="100" />
+          <Property Name="Opis" Type="nvarchar(max)" />
+          <Property Name="Cena" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="IloscDostepna" Type="int" />
+          <Property Name="ID_RodzajProduktu" Type="int" />
+        </EntityType>
+        <EntityType Name="Rabaty">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KodRabatu" Type="nvarchar" MaxLength="20" />
+          <Property Name="ProcentRabatu" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="DataRozpoczecia" Type="date" />
+          <Property Name="DataZakonczenia" Type="date" />
+        </EntityType>
+        <EntityType Name="RodzajeProduktow">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwa" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Ulubione">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Uzytkownika" Type="int" />
+          <Property Name="ID_Produktu" Type="int" />
+        </EntityType>
+        <EntityType Name="Uzytkownicy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Imie" Type="nvarchar" MaxLength="50" />
+          <Property Name="Nazwisko" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="Haslo" Type="nvarchar" MaxLength="255" />
+          <Property Name="Rola" Type="nvarchar" MaxLength="20" />
+          <Property Name="DataRejestracji" Type="date" />
+        </EntityType>
+        <EntityType Name="Zamowienia">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DataZlozenia" Type="date" />
+          <Property Name="ID_Uzytkownika" Type="int" />
+          <Property Name="Status" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="ZamowieniaProdukty">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Zamowienia" Type="int" />
+          <Property Name="ID_Produktu" Type="int" />
+          <Property Name="Ilosc" Type="int" />
+          <Property Name="CenaJednostkowa" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <Association Name="FK__Adresy__ID_Uzytk__47DBAE45">
+          <End Role="Uzytkownicy" Type="Self.Uzytkownicy" Multiplicity="0..1" />
+          <End Role="Adresy" Type="Self.Adresy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uzytkownicy">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Adresy">
+              <PropertyRef Name="ID_Uzytkownika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Dostawy__ID_Zamo__5812160E">
+          <End Role="Zamowienia" Type="Self.Zamowienia" Multiplicity="0..1" />
+          <End Role="Dostawy" Type="Self.Dostawy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zamowienia">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Dostawy">
+              <PropertyRef Name="ID_Zamowienia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Koszyk__ID_Uzytk__4AB81AF0">
+          <End Role="Uzytkownicy" Type="Self.Uzytkownicy" Multiplicity="0..1" />
+          <End Role="Koszyk" Type="Self.Koszyk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uzytkownicy">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Koszyk">
+              <PropertyRef Name="ID_Uzytkownika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KoszykPro__ID_Ko__4E88ABD4">
+          <End Role="Koszyk" Type="Self.Koszyk" Multiplicity="0..1" />
+          <End Role="KoszykProdukty" Type="Self.KoszykProdukty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Koszyk">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KoszykProdukty">
+              <PropertyRef Name="ID_Koszyka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KoszykPro__ID_Pr__4F7CD00D">
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="0..1" />
+          <End Role="KoszykProdukty" Type="Self.KoszykProdukty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produkty">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KoszykProdukty">
+              <PropertyRef Name="ID_Produktu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Opinie__ID_Produ__5AEE82B9">
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="0..1" />
+          <End Role="Opinie" Type="Self.Opinie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produkty">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Opinie">
+              <PropertyRef Name="ID_Produktu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Opinie__ID_Uzytk__5BE2A6F2">
+          <End Role="Uzytkownicy" Type="Self.Uzytkownicy" Multiplicity="0..1" />
+          <End Role="Opinie" Type="Self.Opinie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uzytkownicy">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Opinie">
+              <PropertyRef Name="ID_Uzytkownika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Platnosci__ID_Za__5535A963">
+          <End Role="Zamowienia" Type="Self.Zamowienia" Multiplicity="0..1" />
+          <End Role="Platnosci" Type="Self.Platnosci" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zamowienia">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Platnosci">
+              <PropertyRef Name="ID_Zamowienia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Produkty__ID_Rod__3D5E1FD2">
+          <End Role="RodzajeProduktow" Type="Self.RodzajeProduktow" Multiplicity="0..1" />
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RodzajeProduktow">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Produkty">
+              <PropertyRef Name="ID_RodzajProduktu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ulubione__ID_Pro__619B8048">
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="0..1" />
+          <End Role="Ulubione" Type="Self.Ulubione" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produkty">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ulubione">
+              <PropertyRef Name="ID_Produktu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ulubione__ID_Uzy__60A75C0F">
+          <End Role="Uzytkownicy" Type="Self.Uzytkownicy" Multiplicity="0..1" />
+          <End Role="Ulubione" Type="Self.Ulubione" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uzytkownicy">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ulubione">
+              <PropertyRef Name="ID_Uzytkownika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Zamowieni__ID_Pr__44FF419A">
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="0..1" />
+          <End Role="ZamowieniaProdukty" Type="Self.ZamowieniaProdukty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produkty">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ZamowieniaProdukty">
+              <PropertyRef Name="ID_Produktu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Zamowieni__ID_Uz__412EB0B6">
+          <End Role="Uzytkownicy" Type="Self.Uzytkownicy" Multiplicity="0..1" />
+          <End Role="Zamowienia" Type="Self.Zamowienia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uzytkownicy">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Zamowienia">
+              <PropertyRef Name="ID_Uzytkownika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Zamowieni__ID_Za__440B1D61">
+          <End Role="Zamowienia" Type="Self.Zamowienia" Multiplicity="0..1" />
+          <End Role="ZamowieniaProdukty" Type="Self.ZamowieniaProdukty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zamowienia">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ZamowieniaProdukty">
+              <PropertyRef Name="ID_Zamowienia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OrderModelStoreContainer">
+          <EntitySet Name="Adresy" EntityType="Self.Adresy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dostawy" EntityType="Self.Dostawy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Koszyk" EntityType="Self.Koszyk" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KoszykProdukty" EntityType="Self.KoszykProdukty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Opinie" EntityType="Self.Opinie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Platnosci" EntityType="Self.Platnosci" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produkty" EntityType="Self.Produkty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rabaty" EntityType="Self.Rabaty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RodzajeProduktow" EntityType="Self.RodzajeProduktow" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ulubione" EntityType="Self.Ulubione" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Uzytkownicy" EntityType="Self.Uzytkownicy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zamowienia" EntityType="Self.Zamowienia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZamowieniaProdukty" EntityType="Self.ZamowieniaProdukty" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Adresy__ID_Uzytk__47DBAE45" Association="Self.FK__Adresy__ID_Uzytk__47DBAE45">
+            <End Role="Uzytkownicy" EntitySet="Uzytkownicy" />
+            <End Role="Adresy" EntitySet="Adresy" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Dostawy__ID_Zamo__5812160E" Association="Self.FK__Dostawy__ID_Zamo__5812160E">
+            <End Role="Zamowienia" EntitySet="Zamowienia" />
+            <End Role="Dostawy" EntitySet="Dostawy" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Koszyk__ID_Uzytk__4AB81AF0" Association="Self.FK__Koszyk__ID_Uzytk__4AB81AF0">
+            <End Role="Uzytkownicy" EntitySet="Uzytkownicy" />
+            <End Role="Koszyk" EntitySet="Koszyk" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KoszykPro__ID_Ko__4E88ABD4" Association="Self.FK__KoszykPro__ID_Ko__4E88ABD4">
+            <End Role="Koszyk" EntitySet="Koszyk" />
+            <End Role="KoszykProdukty" EntitySet="KoszykProdukty" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KoszykPro__ID_Pr__4F7CD00D" Association="Self.FK__KoszykPro__ID_Pr__4F7CD00D">
+            <End Role="Produkty" EntitySet="Produkty" />
+            <End Role="KoszykProdukty" EntitySet="KoszykProdukty" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Opinie__ID_Produ__5AEE82B9" Association="Self.FK__Opinie__ID_Produ__5AEE82B9">
+            <End Role="Produkty" EntitySet="Produkty" />
+            <End Role="Opinie" EntitySet="Opinie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Opinie__ID_Uzytk__5BE2A6F2" Association="Self.FK__Opinie__ID_Uzytk__5BE2A6F2">
+            <End Role="Uzytkownicy" EntitySet="Uzytkownicy" />
+            <End Role="Opinie" EntitySet="Opinie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Platnosci__ID_Za__5535A963" Association="Self.FK__Platnosci__ID_Za__5535A963">
+            <End Role="Zamowienia" EntitySet="Zamowienia" />
+            <End Role="Platnosci" EntitySet="Platnosci" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Produkty__ID_Rod__3D5E1FD2" Association="Self.FK__Produkty__ID_Rod__3D5E1FD2">
+            <End Role="RodzajeProduktow" EntitySet="RodzajeProduktow" />
+            <End Role="Produkty" EntitySet="Produkty" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ulubione__ID_Pro__619B8048" Association="Self.FK__Ulubione__ID_Pro__619B8048">
+            <End Role="Produkty" EntitySet="Produkty" />
+            <End Role="Ulubione" EntitySet="Ulubione" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ulubione__ID_Uzy__60A75C0F" Association="Self.FK__Ulubione__ID_Uzy__60A75C0F">
+            <End Role="Uzytkownicy" EntitySet="Uzytkownicy" />
+            <End Role="Ulubione" EntitySet="Ulubione" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Zamowieni__ID_Pr__44FF419A" Association="Self.FK__Zamowieni__ID_Pr__44FF419A">
+            <End Role="Produkty" EntitySet="Produkty" />
+            <End Role="ZamowieniaProdukty" EntitySet="ZamowieniaProdukty" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Zamowieni__ID_Uz__412EB0B6" Association="Self.FK__Zamowieni__ID_Uz__412EB0B6">
+            <End Role="Uzytkownicy" EntitySet="Uzytkownicy" />
+            <End Role="Zamowienia" EntitySet="Zamowienia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Zamowieni__ID_Za__440B1D61" Association="Self.FK__Zamowieni__ID_Za__440B1D61">
+            <End Role="Zamowienia" EntitySet="Zamowienia" />
+            <End Role="ZamowieniaProdukty" EntitySet="ZamowieniaProdukty" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OrderModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Adresy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Uzytkownika" Type="Int32" />
+          <Property Name="Ulica" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Miasto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KodPocztowy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Kraj" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TypAdresu" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Uzytkownicy" Relationship="Self.FK__Adresy__ID_Uzytk__47DBAE45" FromRole="Adresy" ToRole="Uzytkownicy" />
+        </EntityType>
+        <EntityType Name="Dostawy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Zamowienia" Type="Int32" />
+          <Property Name="FirmaKurierska" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NumerSledzenia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StatusDostawy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Zamowienia" Relationship="Self.FK__Dostawy__ID_Zamo__5812160E" FromRole="Dostawy" ToRole="Zamowienia" />
+        </EntityType>
+        <EntityType Name="Koszyk">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Uzytkownika" Type="Int32" />
+          <Property Name="DataUtworzenia" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Uzytkownicy" Relationship="Self.FK__Koszyk__ID_Uzytk__4AB81AF0" FromRole="Koszyk" ToRole="Uzytkownicy" />
+          <NavigationProperty Name="KoszykProdukty" Relationship="Self.FK__KoszykPro__ID_Ko__4E88ABD4" FromRole="Koszyk" ToRole="KoszykProdukty" />
+        </EntityType>
+        <EntityType Name="KoszykProdukty">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Koszyka" Type="Int32" />
+          <Property Name="ID_Produktu" Type="Int32" />
+          <Property Name="Ilosc" Type="Int32" />
+          <NavigationProperty Name="Koszyk" Relationship="Self.FK__KoszykPro__ID_Ko__4E88ABD4" FromRole="KoszykProdukty" ToRole="Koszyk" />
+          <NavigationProperty Name="Produkty" Relationship="Self.FK__KoszykPro__ID_Pr__4F7CD00D" FromRole="KoszykProdukty" ToRole="Produkty" />
+        </EntityType>
+        <EntityType Name="Opinie">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Produktu" Type="Int32" />
+          <Property Name="ID_Uzytkownika" Type="Int32" />
+          <Property Name="Ocena" Type="Int32" />
+          <Property Name="Komentarz" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DataDodania" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Produkty" Relationship="Self.FK__Opinie__ID_Produ__5AEE82B9" FromRole="Opinie" ToRole="Produkty" />
+          <NavigationProperty Name="Uzytkownicy" Relationship="Self.FK__Opinie__ID_Uzytk__5BE2A6F2" FromRole="Opinie" ToRole="Uzytkownicy" />
+        </EntityType>
+        <EntityType Name="Platnosci">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Zamowienia" Type="Int32" />
+          <Property Name="TypPlatnosci" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="StatusPlatnosci" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Zamowienia" Relationship="Self.FK__Platnosci__ID_Za__5535A963" FromRole="Platnosci" ToRole="Zamowienia" />
+        </EntityType>
+        <EntityType Name="Produkty">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Opis" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Cena" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="IloscDostepna" Type="Int32" />
+          <Property Name="ID_RodzajProduktu" Type="Int32" />
+          <NavigationProperty Name="KoszykProdukty" Relationship="Self.FK__KoszykPro__ID_Pr__4F7CD00D" FromRole="Produkty" ToRole="KoszykProdukty" />
+          <NavigationProperty Name="Opinie" Relationship="Self.FK__Opinie__ID_Produ__5AEE82B9" FromRole="Produkty" ToRole="Opinie" />
+          <NavigationProperty Name="RodzajeProduktow" Relationship="Self.FK__Produkty__ID_Rod__3D5E1FD2" FromRole="Produkty" ToRole="RodzajeProduktow" />
+          <NavigationProperty Name="Ulubione" Relationship="Self.FK__Ulubione__ID_Pro__619B8048" FromRole="Produkty" ToRole="Ulubione" />
+          <NavigationProperty Name="ZamowieniaProdukty" Relationship="Self.FK__Zamowieni__ID_Pr__44FF419A" FromRole="Produkty" ToRole="ZamowieniaProdukty" />
+        </EntityType>
+        <EntityType Name="Rabaty">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KodRabatu" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ProcentRabatu" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="DataRozpoczecia" Type="DateTime" Precision="0" />
+          <Property Name="DataZakonczenia" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="RodzajeProduktow">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Produkty" Relationship="Self.FK__Produkty__ID_Rod__3D5E1FD2" FromRole="RodzajeProduktow" ToRole="Produkty" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Ulubione">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Uzytkownika" Type="Int32" />
+          <Property Name="ID_Produktu" Type="Int32" />
+          <NavigationProperty Name="Produkty" Relationship="Self.FK__Ulubione__ID_Pro__619B8048" FromRole="Ulubione" ToRole="Produkty" />
+          <NavigationProperty Name="Uzytkownicy" Relationship="Self.FK__Ulubione__ID_Uzy__60A75C0F" FromRole="Ulubione" ToRole="Uzytkownicy" />
+        </EntityType>
+        <EntityType Name="Uzytkownicy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Imie" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Nazwisko" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Haslo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Rola" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DataRejestracji" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Adresy" Relationship="Self.FK__Adresy__ID_Uzytk__47DBAE45" FromRole="Uzytkownicy" ToRole="Adresy" />
+          <NavigationProperty Name="Koszyk" Relationship="Self.FK__Koszyk__ID_Uzytk__4AB81AF0" FromRole="Uzytkownicy" ToRole="Koszyk" />
+          <NavigationProperty Name="Opinie" Relationship="Self.FK__Opinie__ID_Uzytk__5BE2A6F2" FromRole="Uzytkownicy" ToRole="Opinie" />
+          <NavigationProperty Name="Ulubione" Relationship="Self.FK__Ulubione__ID_Uzy__60A75C0F" FromRole="Uzytkownicy" ToRole="Ulubione" />
+          <NavigationProperty Name="Zamowienia" Relationship="Self.FK__Zamowieni__ID_Uz__412EB0B6" FromRole="Uzytkownicy" ToRole="Zamowienia" />
+        </EntityType>
+        <EntityType Name="Zamowienia">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DataZlozenia" Type="DateTime" Precision="0" />
+          <Property Name="ID_Uzytkownika" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Dostawy" Relationship="Self.FK__Dostawy__ID_Zamo__5812160E" FromRole="Zamowienia" ToRole="Dostawy" />
+          <NavigationProperty Name="Platnosci" Relationship="Self.FK__Platnosci__ID_Za__5535A963" FromRole="Zamowienia" ToRole="Platnosci" />
+          <NavigationProperty Name="Uzytkownicy" Relationship="Self.FK__Zamowieni__ID_Uz__412EB0B6" FromRole="Zamowienia" ToRole="Uzytkownicy" />
+          <NavigationProperty Name="ZamowieniaProdukty" Relationship="Self.FK__Zamowieni__ID_Za__440B1D61" FromRole="Zamowienia" ToRole="ZamowieniaProdukty" />
+        </EntityType>
+        <EntityType Name="ZamowieniaProdukty">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Zamowienia" Type="Int32" />
+          <Property Name="ID_Produktu" Type="Int32" />
+          <Property Name="Ilosc" Type="Int32" />
+          <Property Name="CenaJednostkowa" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="Produkty" Relationship="Self.FK__Zamowieni__ID_Pr__44FF419A" FromRole="ZamowieniaProdukty" ToRole="Produkty" />
+          <NavigationProperty Name="Zamowienia" Relationship="Self.FK__Zamowieni__ID_Za__440B1D61" FromRole="ZamowieniaProdukty" ToRole="Zamowienia" />
+        </EntityType>
+        <Association Name="FK__Adresy__ID_Uzytk__47DBAE45">
+          <End Role="Uzytkownicy" Type="Self.Uzytkownicy" Multiplicity="0..1" />
+          <End Role="Adresy" Type="Self.Adresy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uzytkownicy">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Adresy">
+              <PropertyRef Name="ID_Uzytkownika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Dostawy__ID_Zamo__5812160E">
+          <End Role="Zamowienia" Type="Self.Zamowienia" Multiplicity="0..1" />
+          <End Role="Dostawy" Type="Self.Dostawy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zamowienia">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Dostawy">
+              <PropertyRef Name="ID_Zamowienia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Koszyk__ID_Uzytk__4AB81AF0">
+          <End Role="Uzytkownicy" Type="Self.Uzytkownicy" Multiplicity="0..1" />
+          <End Role="Koszyk" Type="Self.Koszyk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uzytkownicy">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Koszyk">
+              <PropertyRef Name="ID_Uzytkownika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KoszykPro__ID_Ko__4E88ABD4">
+          <End Role="Koszyk" Type="Self.Koszyk" Multiplicity="0..1" />
+          <End Role="KoszykProdukty" Type="Self.KoszykProdukty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Koszyk">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KoszykProdukty">
+              <PropertyRef Name="ID_Koszyka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KoszykPro__ID_Pr__4F7CD00D">
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="0..1" />
+          <End Role="KoszykProdukty" Type="Self.KoszykProdukty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produkty">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KoszykProdukty">
+              <PropertyRef Name="ID_Produktu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Opinie__ID_Produ__5AEE82B9">
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="0..1" />
+          <End Role="Opinie" Type="Self.Opinie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produkty">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Opinie">
+              <PropertyRef Name="ID_Produktu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Opinie__ID_Uzytk__5BE2A6F2">
+          <End Role="Uzytkownicy" Type="Self.Uzytkownicy" Multiplicity="0..1" />
+          <End Role="Opinie" Type="Self.Opinie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uzytkownicy">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Opinie">
+              <PropertyRef Name="ID_Uzytkownika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Platnosci__ID_Za__5535A963">
+          <End Role="Zamowienia" Type="Self.Zamowienia" Multiplicity="0..1" />
+          <End Role="Platnosci" Type="Self.Platnosci" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zamowienia">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Platnosci">
+              <PropertyRef Name="ID_Zamowienia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Produkty__ID_Rod__3D5E1FD2">
+          <End Role="RodzajeProduktow" Type="Self.RodzajeProduktow" Multiplicity="0..1" />
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RodzajeProduktow">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Produkty">
+              <PropertyRef Name="ID_RodzajProduktu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ulubione__ID_Pro__619B8048">
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="0..1" />
+          <End Role="Ulubione" Type="Self.Ulubione" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produkty">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ulubione">
+              <PropertyRef Name="ID_Produktu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Zamowieni__ID_Pr__44FF419A">
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="0..1" />
+          <End Role="ZamowieniaProdukty" Type="Self.ZamowieniaProdukty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produkty">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ZamowieniaProdukty">
+              <PropertyRef Name="ID_Produktu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ulubione__ID_Uzy__60A75C0F">
+          <End Role="Uzytkownicy" Type="Self.Uzytkownicy" Multiplicity="0..1" />
+          <End Role="Ulubione" Type="Self.Ulubione" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uzytkownicy">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ulubione">
+              <PropertyRef Name="ID_Uzytkownika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Zamowieni__ID_Uz__412EB0B6">
+          <End Role="Uzytkownicy" Type="Self.Uzytkownicy" Multiplicity="0..1" />
+          <End Role="Zamowienia" Type="Self.Zamowienia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uzytkownicy">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Zamowienia">
+              <PropertyRef Name="ID_Uzytkownika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Zamowieni__ID_Za__440B1D61">
+          <End Role="Zamowienia" Type="Self.Zamowienia" Multiplicity="0..1" />
+          <End Role="ZamowieniaProdukty" Type="Self.ZamowieniaProdukty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zamowienia">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ZamowieniaProdukty">
+              <PropertyRef Name="ID_Zamowienia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelOrder" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Adresy" EntityType="Self.Adresy" />
+          <EntitySet Name="Dostawy" EntityType="Self.Dostawy" />
+          <EntitySet Name="Koszyk" EntityType="Self.Koszyk" />
+          <EntitySet Name="KoszykProdukty" EntityType="Self.KoszykProdukty" />
+          <EntitySet Name="Opinie" EntityType="Self.Opinie" />
+          <EntitySet Name="Platnosci" EntityType="Self.Platnosci" />
+          <EntitySet Name="Produkty" EntityType="Self.Produkty" />
+          <EntitySet Name="Rabaty" EntityType="Self.Rabaty" />
+          <EntitySet Name="RodzajeProduktow" EntityType="Self.RodzajeProduktow" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Ulubione" EntityType="Self.Ulubione" />
+          <EntitySet Name="Uzytkownicy" EntityType="Self.Uzytkownicy" />
+          <EntitySet Name="Zamowienia" EntityType="Self.Zamowienia" />
+          <EntitySet Name="ZamowieniaProdukty" EntityType="Self.ZamowieniaProdukty" />
+          <AssociationSet Name="FK__Adresy__ID_Uzytk__47DBAE45" Association="Self.FK__Adresy__ID_Uzytk__47DBAE45">
+            <End Role="Uzytkownicy" EntitySet="Uzytkownicy" />
+            <End Role="Adresy" EntitySet="Adresy" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Dostawy__ID_Zamo__5812160E" Association="Self.FK__Dostawy__ID_Zamo__5812160E">
+            <End Role="Zamowienia" EntitySet="Zamowienia" />
+            <End Role="Dostawy" EntitySet="Dostawy" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Koszyk__ID_Uzytk__4AB81AF0" Association="Self.FK__Koszyk__ID_Uzytk__4AB81AF0">
+            <End Role="Uzytkownicy" EntitySet="Uzytkownicy" />
+            <End Role="Koszyk" EntitySet="Koszyk" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KoszykPro__ID_Ko__4E88ABD4" Association="Self.FK__KoszykPro__ID_Ko__4E88ABD4">
+            <End Role="Koszyk" EntitySet="Koszyk" />
+            <End Role="KoszykProdukty" EntitySet="KoszykProdukty" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KoszykPro__ID_Pr__4F7CD00D" Association="Self.FK__KoszykPro__ID_Pr__4F7CD00D">
+            <End Role="Produkty" EntitySet="Produkty" />
+            <End Role="KoszykProdukty" EntitySet="KoszykProdukty" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Opinie__ID_Produ__5AEE82B9" Association="Self.FK__Opinie__ID_Produ__5AEE82B9">
+            <End Role="Produkty" EntitySet="Produkty" />
+            <End Role="Opinie" EntitySet="Opinie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Opinie__ID_Uzytk__5BE2A6F2" Association="Self.FK__Opinie__ID_Uzytk__5BE2A6F2">
+            <End Role="Uzytkownicy" EntitySet="Uzytkownicy" />
+            <End Role="Opinie" EntitySet="Opinie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Platnosci__ID_Za__5535A963" Association="Self.FK__Platnosci__ID_Za__5535A963">
+            <End Role="Zamowienia" EntitySet="Zamowienia" />
+            <End Role="Platnosci" EntitySet="Platnosci" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Produkty__ID_Rod__3D5E1FD2" Association="Self.FK__Produkty__ID_Rod__3D5E1FD2">
+            <End Role="RodzajeProduktow" EntitySet="RodzajeProduktow" />
+            <End Role="Produkty" EntitySet="Produkty" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ulubione__ID_Pro__619B8048" Association="Self.FK__Ulubione__ID_Pro__619B8048">
+            <End Role="Produkty" EntitySet="Produkty" />
+            <End Role="Ulubione" EntitySet="Ulubione" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Zamowieni__ID_Pr__44FF419A" Association="Self.FK__Zamowieni__ID_Pr__44FF419A">
+            <End Role="Produkty" EntitySet="Produkty" />
+            <End Role="ZamowieniaProdukty" EntitySet="ZamowieniaProdukty" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ulubione__ID_Uzy__60A75C0F" Association="Self.FK__Ulubione__ID_Uzy__60A75C0F">
+            <End Role="Uzytkownicy" EntitySet="Uzytkownicy" />
+            <End Role="Ulubione" EntitySet="Ulubione" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Zamowieni__ID_Uz__412EB0B6" Association="Self.FK__Zamowieni__ID_Uz__412EB0B6">
+            <End Role="Uzytkownicy" EntitySet="Uzytkownicy" />
+            <End Role="Zamowienia" EntitySet="Zamowienia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Zamowieni__ID_Za__440B1D61" Association="Self.FK__Zamowieni__ID_Za__440B1D61">
+            <End Role="Zamowienia" EntitySet="Zamowienia" />
+            <End Role="ZamowieniaProdukty" EntitySet="ZamowieniaProdukty" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OrderModelStoreContainer" CdmEntityContainer="ModelOrder">
+          <EntitySetMapping Name="Adresy">
+            <EntityTypeMapping TypeName="OrderModel.Adresy">
+              <MappingFragment StoreEntitySet="Adresy">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_Uzytkownika" ColumnName="ID_Uzytkownika" />
+                <ScalarProperty Name="Ulica" ColumnName="Ulica" />
+                <ScalarProperty Name="Miasto" ColumnName="Miasto" />
+                <ScalarProperty Name="KodPocztowy" ColumnName="KodPocztowy" />
+                <ScalarProperty Name="Kraj" ColumnName="Kraj" />
+                <ScalarProperty Name="TypAdresu" ColumnName="TypAdresu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dostawy">
+            <EntityTypeMapping TypeName="OrderModel.Dostawy">
+              <MappingFragment StoreEntitySet="Dostawy">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_Zamowienia" ColumnName="ID_Zamowienia" />
+                <ScalarProperty Name="FirmaKurierska" ColumnName="FirmaKurierska" />
+                <ScalarProperty Name="NumerSledzenia" ColumnName="NumerSledzenia" />
+                <ScalarProperty Name="StatusDostawy" ColumnName="StatusDostawy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Koszyk">
+            <EntityTypeMapping TypeName="OrderModel.Koszyk">
+              <MappingFragment StoreEntitySet="Koszyk">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_Uzytkownika" ColumnName="ID_Uzytkownika" />
+                <ScalarProperty Name="DataUtworzenia" ColumnName="DataUtworzenia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KoszykProdukty">
+            <EntityTypeMapping TypeName="OrderModel.KoszykProdukty">
+              <MappingFragment StoreEntitySet="KoszykProdukty">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_Koszyka" ColumnName="ID_Koszyka" />
+                <ScalarProperty Name="ID_Produktu" ColumnName="ID_Produktu" />
+                <ScalarProperty Name="Ilosc" ColumnName="Ilosc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Opinie">
+            <EntityTypeMapping TypeName="OrderModel.Opinie">
+              <MappingFragment StoreEntitySet="Opinie">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_Produktu" ColumnName="ID_Produktu" />
+                <ScalarProperty Name="ID_Uzytkownika" ColumnName="ID_Uzytkownika" />
+                <ScalarProperty Name="Ocena" ColumnName="Ocena" />
+                <ScalarProperty Name="Komentarz" ColumnName="Komentarz" />
+                <ScalarProperty Name="DataDodania" ColumnName="DataDodania" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Platnosci">
+            <EntityTypeMapping TypeName="OrderModel.Platnosci">
+              <MappingFragment StoreEntitySet="Platnosci">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_Zamowienia" ColumnName="ID_Zamowienia" />
+                <ScalarProperty Name="TypPlatnosci" ColumnName="TypPlatnosci" />
+                <ScalarProperty Name="StatusPlatnosci" ColumnName="StatusPlatnosci" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produkty">
+            <EntityTypeMapping TypeName="OrderModel.Produkty">
+              <MappingFragment StoreEntitySet="Produkty">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+                <ScalarProperty Name="Cena" ColumnName="Cena" />
+                <ScalarProperty Name="IloscDostepna" ColumnName="IloscDostepna" />
+                <ScalarProperty Name="ID_RodzajProduktu" ColumnName="ID_RodzajProduktu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rabaty">
+            <EntityTypeMapping TypeName="OrderModel.Rabaty">
+              <MappingFragment StoreEntitySet="Rabaty">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="KodRabatu" ColumnName="KodRabatu" />
+                <ScalarProperty Name="ProcentRabatu" ColumnName="ProcentRabatu" />
+                <ScalarProperty Name="DataRozpoczecia" ColumnName="DataRozpoczecia" />
+                <ScalarProperty Name="DataZakonczenia" ColumnName="DataZakonczenia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RodzajeProduktow">
+            <EntityTypeMapping TypeName="OrderModel.RodzajeProduktow">
+              <MappingFragment StoreEntitySet="RodzajeProduktow">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="OrderModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ulubione">
+            <EntityTypeMapping TypeName="OrderModel.Ulubione">
+              <MappingFragment StoreEntitySet="Ulubione">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_Uzytkownika" ColumnName="ID_Uzytkownika" />
+                <ScalarProperty Name="ID_Produktu" ColumnName="ID_Produktu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Uzytkownicy">
+            <EntityTypeMapping TypeName="OrderModel.Uzytkownicy">
+              <MappingFragment StoreEntitySet="Uzytkownicy">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Imie" ColumnName="Imie" />
+                <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Haslo" ColumnName="Haslo" />
+                <ScalarProperty Name="Rola" ColumnName="Rola" />
+                <ScalarProperty Name="DataRejestracji" ColumnName="DataRejestracji" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zamowienia">
+            <EntityTypeMapping TypeName="OrderModel.Zamowienia">
+              <MappingFragment StoreEntitySet="Zamowienia">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DataZlozenia" ColumnName="DataZlozenia" />
+                <ScalarProperty Name="ID_Uzytkownika" ColumnName="ID_Uzytkownika" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZamowieniaProdukty">
+            <EntityTypeMapping TypeName="OrderModel.ZamowieniaProdukty">
+              <MappingFragment StoreEntitySet="ZamowieniaProdukty">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_Zamowienia" ColumnName="ID_Zamowienia" />
+                <ScalarProperty Name="ID_Produktu" ColumnName="ID_Produktu" />
+                <ScalarProperty Name="Ilosc" ColumnName="Ilosc" />
+                <ScalarProperty Name="CenaJednostkowa" ColumnName="CenaJednostkowa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

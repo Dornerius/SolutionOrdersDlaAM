@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5a2e8da47eeb474d8ae9d101ba4b003a" Name="Diagram1">
+        <EntityTypeShape EntityType="OrderModel.Adresy" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderModel.Dostawy" Width="1.5" PointX="5.25" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderModel.Koszyk" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderModel.KoszykProdukty" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderModel.Opinie" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderModel.Platnosci" Width="1.5" PointX="5.25" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderModel.Produkty" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderModel.Rabaty" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderModel.RodzajeProduktow" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderModel.Ulubione" Width="1.5" PointX="6" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderModel.Uzytkownicy" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderModel.Zamowienia" Width="1.5" PointX="3" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderModel.ZamowieniaProdukty" Width="1.5" PointX="8.25" PointY="19.875" IsExpanded="true" />
+        <AssociationConnector Association="OrderModel.FK__Adresy__ID_Uzytk__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="OrderModel.FK__Dostawy__ID_Zamo__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="OrderModel.FK__Koszyk__ID_Uzytk__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="OrderModel.FK__KoszykPro__ID_Ko__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="OrderModel.FK__KoszykPro__ID_Pr__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="OrderModel.FK__Opinie__ID_Produ__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="OrderModel.FK__Opinie__ID_Uzytk__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="OrderModel.FK__Platnosci__ID_Za__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="OrderModel.FK__Produkty__ID_Rod__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="OrderModel.FK__Ulubione__ID_Pro__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="OrderModel.FK__Zamowieni__ID_Pr__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="OrderModel.FK__Ulubione__ID_Uzy__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="OrderModel.FK__Zamowieni__ID_Uz__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="OrderModel.FK__Zamowieni__ID_Za__440B1D61" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
